@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Color Guessing Game</title>
+</head>
+<body onload="game()">
+
+<script type="text/javascript">
+
+
+
+    //Declaring variables used globally
+    var colors = ["blue","cyan","gold","gray","green","magenta","orange","red","white","yellow"];
+    var COM;
+    var finalAnswer;
+
+    //User answer to question
+    var Answer = "none";
+
+    //How many tries it took the user to solve
+    var guesses = 1;
+    var finish = false;
+
+    //Background Color Change
+
+
+
+
+    function game() {
+        //generate random color
+        var randomNumber = Math.floor(
+                Math.random() * (colors.length) + 1);
+        //var randomNumberInteger =
+                //rnd.nextInt (randomNumber);
+        COM = randomNumber;
+        var solution =
+                String(colors[randomNumber]);
+
+
+
+        while (!finish) {
+            //Prompt user
+            Answer = prompt("🤔 I am thinking of one of these colors: 🤔 \n\n" + colors + "\n\nWhat color am I " +
+                    "thinking of?");
+            finalAnswer =
+                    colors.indexOf(Answer);
+            finish = evaluateGuess();
+        }
+
+
+        function evaluateGuess() {
+
+            if (finalAnswer <= -1) {
+                alert("Sorry, I don't recognize your color. \n\n Please try again.");
+                return false;
+            }
+
+            if (finalAnswer > COM) {
+                alert("Sorry, try another color!" + " \n\nThe color you chose is alphabetically higher than mine.");
+                guesses += 1;
+                return false;
+            }
+
+            if (finalAnswer < COM) {
+                alert("Sorry, your guess is not correct!\n\n Hint: Your color is alphabetically lower than mine.\n\n " +
+                        "Please try again.");
+                guesses += 1;
+                return false;
+            }
+
+            if (finalAnswer = COM){
+                var myBody=document.getElementsByTagName("body")[0];
+                myBody.style.background= Answer;
+            alert("You guessed it! 👍🏻 \n\nThe correct answer is: " + solution + "\n\nThanks for playing! 😊 \n\nLooks like it took you " + guesses + " tries, mate. 😂 \n\n" +
+                    "See your color in the background!" + " Refresh to play again 🎮");
+
+            return true;}
+
+        } //end function
+
+    }
+
+
+
+
+</script>
+</body>
+</html>
